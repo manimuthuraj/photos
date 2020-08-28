@@ -1,0 +1,29 @@
+<%- include("./partials/header") %>
+    <div class="container">
+        <header class="jumbotron">
+            <div class="container">
+                <h1>Welcome to PhotosAndAlbums</h1>
+            </div>
+        </header>
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <% user.forEach(function(x){ %>
+                <div class="cl-md-3 col-sm-6 col-lg-4">
+                    <div class="thumbnail">
+
+                        <div class="caption">
+                            <h4>
+                                <%= x.username %>
+                            </h4>
+                            <h4>
+                                <%= x.email %>
+                            </h4>
+                            <p>
+                                <a href="/user/<%= x._id %>/photo" class="btn btn-primary">Photos</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+    <%- include("./partials/footer") %>

@@ -1,0 +1,53 @@
+<%- include ("../partials/header") %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="thumbnail">
+                    <img class="image-resposive" src="<%= photos.image %>">
+                    <div class="caption-full">
+                        <h4>
+                            <a>
+                                <%= photos.name %>
+                            </a>
+                        </h4>
+                        <p>
+                            <%=photos.description %>
+                        </p>
+                        <p> <em>By,</em>
+                            <%= photos.author.username %>
+                        </p>
+                        <% if(currentUser && photos.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-warning" href="/photo/<%= photos._id %>/edit">Edit</a>
+                            <form id="delete" action="/photo/<%= photos._id %>?_method=DELETE" method="post">
+                                <button class="btn btn-danger">DELETE</button>
+                            </form>
+                            <% } %>
+
+                    </div>
+                </div>
+                <div class="well">
+                    <div class="text-right">
+                        <p>
+                            <a href="/photo/<%= photos._id %>/comments/new" class="btn btn-primary">ADD commments</a>
+                        </p>
+                    </div>
+                    <hr>
+                    <% photos.comments.forEach(function(comment){%>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong> <%= comment.author.username %>: </strong>
+                                <p>
+                                    <%=comment.text %>
+                                </p>
+                                <%})%>
+                                    <%if(Object.keys(photos.comments).length === 0){%>
+                                        <h1> NO comments YET </h1>
+                                        <%}%>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <%- include ("../partials/footer") %>

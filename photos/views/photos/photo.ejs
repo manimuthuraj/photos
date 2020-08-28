@@ -1,0 +1,33 @@
+<%- include("../partials/header") %>
+    <div class="container">
+        <header class="jumbotron">
+            <div class="container">
+                <h1>
+                    <%=user.username%>'s Photos </h1>
+                <p>
+                    <a href="/photo/add" class="btn btn-primary btn-lg">Add New photo</a>
+                </p>
+            </div>
+        </header>
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+            <% photos.forEach(function(x){ %>
+                <div class="cl-md-3 col-sm-6 col-lg-4">
+                    <div class="thumbnail">
+                        <img src="<%= x.image %>">
+                        <div class="caption">
+                            <h4>
+                                <%= x.title %>
+                            </h4>
+                            <p>
+                                <a href="/photo/<%= x._id %>" class="btn btn-primary">More info</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+        <%if(Object.keys(photos).length === 0){%>
+            <h1> NO PHOTOS YET </h1>
+            <%}%>
+    </div>
+    <%- include("../partials/footer") %>
